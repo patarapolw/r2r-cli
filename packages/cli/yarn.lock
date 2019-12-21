@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+"@r2r/api-definition@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@r2r/api-definition/-/api-definition-0.0.3.tgz#7f2c09cc9a5a10a494a7b6e09e8fce4e0162ffad"
+  integrity sha512-/msgg1+M9jCZVAAqO+Eg0mraCvgol0AdXN+6QrifiqheChqrspuWKiEG+CPfs3x0FXIKbBF4n/W9jCyGPiUtFA==
+
+"@r2r/web@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@r2r/web/-/web-0.0.3.tgz#fcad37d70dbd73ec88985cf253b599e215fe35ee"
+  integrity sha512-xo1BXVIbz9q/leIZJ1RIY39vkwcrSgUfwK/llQd7fqEgNTWE39ylpBdrSvXBsfytsnCEI6X2YgTWsbYVkwQspg==
+
 "@types/adm-zip@^0.4.32":
   version "0.4.32"
   resolved "https://registry.yarnpkg.com/@types/adm-zip/-/adm-zip-0.4.32.tgz#6de01309af60677065d2e52b417a023303220931"
