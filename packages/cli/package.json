@@ -1,15 +1,20 @@
 {
-  "name": "@r2r/server",
+  "name": "@r2r/cli",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "r2r": "./dist/cli.js"
+  },
   "scripts": {
-    "start": "node ./dist/cli.js",
+    "start": "node ./dist/cli.js .",
     "help": "ts-node ./src/cli.ts --help",
-    "build": "tsc"
+    "build": "tsc",
+    "prepack": "tsc"
   },
   "dependencies": {
     "@r2r/api-definition": "*",
+    "@r2r/web": "*",
     "adm-zip": "^0.4.13",
     "cors": "^2.8.5",
     "dot-prop": "^5.2.0",
@@ -42,5 +47,8 @@
     "@types/yargs": "^13.0.3",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

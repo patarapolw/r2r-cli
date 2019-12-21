@@ -1,31 +1,17 @@
 {
-  "name": "r2r-cli",
-  "version": "1.0.0",
-  "main": "main.js",
+  "name": "root",
+  "private": true,
   "author": {
     "email": "patarapolw@gmail.com",
     "name": "Pacharapol Withayasakpunt",
     "url": "https://polvcode.dev"
   },
   "repository": "github:patarapolw/r2r-cli",
-  "private": true,
-  "license": "MIT",
-  "workspaces": [
-    "api-definition",
-    "server",
-    "web"
-  ],
   "devDependencies": {
+    "lerna": "^3.19.0",
     "eslint-plugin-json": "^2.0.1"
   },
-  "dependencies": {
-    "wsrun": "^5.2.0"
-  },
-  "bin": {
-    "r2r": "./main.js"
-  },
   "scripts": {
-    "build": "wsrun --exclude-missing build",
-    "postinstall": "yarn build"
+    "bootstrap": "lerna bootstrap"
   }
 }

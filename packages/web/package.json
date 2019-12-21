@@ -1,11 +1,11 @@
 {
   "name": "@r2r/web",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prepack": "vue-cli-service build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
@@ -53,5 +53,8 @@
     "@vue/eslint-config-typescript": "^4.0.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
