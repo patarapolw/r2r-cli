@@ -49,7 +49,7 @@ export default async function main (port: string, root: string, filename: string
   })
   quizRouter(apiRouter, db)
 
-  app.use(express.static(path.join(require.resolve('@r2r/web'), 'dist')))
+  app.use(express.static(path.resolve(require.resolve('@r2r/web'), '../dist')))
 
   await db.init()
   server.listen(port, () => console.log(`Server running at http://localhost:${port}`))

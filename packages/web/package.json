@@ -65,5 +65,6 @@
   "repository": "github:patarapolw/r2r-cli",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "main": "index.js"
 }
