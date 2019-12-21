@@ -1,0 +1,18 @@
+{
+  "name": "r2r-cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": {
+    "email": "patarapolw@gmail.com",
+    "name": "Pacharapol Withayasakpunt",
+    "url": "https://polvcode.dev"
+  },
+  "repository": "github:patarapolw/r2r-cli",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "api-definition",
+    "server",
+    "web"
+  ]
+}
