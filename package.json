@@ -6,12 +6,14 @@
     "name": "Pacharapol Withayasakpunt",
     "url": "https://polvcode.dev"
   },
+  "license": "MIT",
   "repository": "github:patarapolw/r2r-cli",
   "devDependencies": {
     "lerna": "^3.19.0",
     "eslint-plugin-json": "^2.0.1"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna exec -- yarn build"
   }
 }

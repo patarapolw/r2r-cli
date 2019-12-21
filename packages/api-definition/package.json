@@ -3,8 +3,17 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "author": {
+    "email": "patarapolw@gmail.com",
+    "name": "Pacharapol Withayasakpunt",
+    "url": "https://polvcode.dev"
+  },
   "license": "MIT",
+  "repository": "github:patarapolw/r2r-cli",
   "files": [
     "dist"
-  ]
+  ],
+  "scripts": {
+    "build": "echo 'There is no need to run tsc, yet'"
+  }
 }
