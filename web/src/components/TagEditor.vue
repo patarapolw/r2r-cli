@@ -12,7 +12,7 @@ import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 
 @Component
 export default class TagEditor extends Vue {
-  @Prop({ required: true }) value!: string;
+  @Prop({ required: true }) value!: string
 
   get tagSet () {
     return new Set(this.value.split(' ').filter(v => v))

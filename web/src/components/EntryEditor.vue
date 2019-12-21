@@ -80,34 +80,34 @@ import TagEditor from './TagEditor.vue'
 import MarkdownEditor from './MarkdownEditor.vue'
 import dotProp from 'dot-prop'
 import deepMerge from 'lodash.merge'
-import { Columns, editorApi } from '../global'
+import { Columns, api } from '../global'
 import { fixData } from '../utils'
 
 @Component({
   components: {
     DatetimeNullable,
     TagEditor,
-    MarkdownEditor
-  }
+    MarkdownEditor,
+  },
 })
 export default class EntryEditor extends Vue {
-  @Prop({ required: true }) id!: string;
-  @Prop() entryId?: string;
-  @Prop() title!: string;
+  @Prop({ required: true }) id!: string
+  @Prop() entryId?: string
+  @Prop({ default: '' }) title!: string
 
-  data: any = {};
-  update: any = {};
-  isLoading = false;
+  data: any = {}
+  update: any = {}
+  isLoading = false
 
-  dotProp = dotProp;
-  deepMerge = deepMerge;
+  dotProp = dotProp
+  deepMerge = deepMerge
 
   get dataCols () {
     return Object.keys(this.data.data || {})
       .map((c) => {
         return {
           name: `@${c}`,
-          label: c
+          label: c,
         }
       })
   }
@@ -144,7 +144,7 @@ export default class EntryEditor extends Vue {
         if (toAdd) {
           this.data.data.push({
             key: k,
-            value: ''
+            value: '',
           })
         }
 
@@ -163,8 +163,10 @@ export default class EntryEditor extends Vue {
     if (this.entryId) {
       this.isLoading = true
 
-      const { data } = await editorApi.get({
-        body: { q: { 'card___id': this.entryId } }
+      const { data } = await api.request({
+        url: '/editor/',
+        method: 'POST',
+        data: { q: { 'card___id': this.entryId } },
       })
 
       Vue.set(this, 'data', fixData(data.data[0]))
@@ -187,17 +189,21 @@ export default class EntryEditor extends Vue {
 
     if (Object.keys(this.update).length > 0) {
       if (this.entryId) {
-        const r = await editorApi.update({
-          body: { ids: [this.entryId], update: this.update }
+        const r = await api.request({
+          url: '/editor/update',
+          method: 'PUT',
+          data: { ids: [this.entryId], update: this.update },
         })
-        if (r.status === 200) {
+        if (r.status === 201) {
           this.$bvModal.msgBoxOk('Updated')
         }
       } else {
-        const r = await editorApi.create({
-          body: { create: [this.update] }
+        const r = await api.request({
+          url: '/editor/create',
+          method: 'PUT',
+          data: { create: [this.update] },
         })
-        if (r.status === 200) {
+        if (r.status === 201) {
           this.$bvModal.msgBoxOk('Created')
         }
       }

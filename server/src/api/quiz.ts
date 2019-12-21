@@ -1,11 +1,14 @@
 import moment from 'moment'
-import { DB } from '../global'
-import { parseQ } from '../engine/db'
-import { buildRouter } from 'rest-ts-express'
-import quizApiDefinition, { ITreeViewItem } from '@/api-definitions/quiz'
+import Db, { parseQ } from '../engine/db'
+import { IQuizApi } from '@r2r/api-definition'
+import RestypedRouter from 'restyped-express-async'
+import { Router } from 'express'
+import { ITreeViewItem } from '@r2r/api-definition/dist/quiz'
 
-const router = buildRouter(quizApiDefinition, (_) => _
-  .get(async (req) => {
+export default (app: Router, db: Db) => {
+  const router = RestypedRouter<IQuizApi>(app)
+
+  router.post('/quiz/', async (req) => {
     const { q, deck, type, due } = req.body
 
     let $or = [parseQ(q)]
@@ -16,12 +19,12 @@ const router = buildRouter(quizApiDefinition, (_) => _
         return [
           {
             ...cond,
-            deck
+            deck,
           },
           {
             ...cond,
-            deck: { $like: `${deck}/%` }
-          }
+            deck: { $like: `${deck}/%` },
+          },
         ]
       }).reduce((a, b) => [...a, ...b])
     }
@@ -65,27 +68,28 @@ const router = buildRouter(quizApiDefinition, (_) => _
         return [
           {
             ...cond,
-            nextReview: { $exists: false }
+            nextReview: { $exists: false },
           },
           {
             ...cond,
-            nextReview: { $lte: moment().toISOString() }
-          }
+            nextReview: { $lte: moment().toISOString() },
+          },
         ]
       }).reduce((a, b) => [...a, ...b])
     }
 
     const ids = Array.from(new Set((await Promise.all($or.map(async (cond) => {
-      return (await DB.parseCond(cond, {
+      return (await db.parseCond(cond, {
         fields: {
-          card: ['_id']
-        }
+          card: ['_id'],
+        },
       })).map((c) => c._id!)
     }))).reduce((a, b) => [...a, ...b])))
 
     return { ids }
   })
-  .treeview(async (req) => {
+
+  router.post('/quiz/treeview', async (req) => {
     function recurseParseData (data: ITreeViewItem[], deck: string[], _depth = 0) {
       let doLoop = true
 
@@ -117,18 +121,18 @@ const router = buildRouter(quizApiDefinition, (_) => _
           stat: {
             new: thisDeckData.filter((d) => !d.nextReview).length,
             leech: thisDeckData.filter((d) => d.srsLevel === 0).length,
-            due: thisDeckData.filter((d) => d.nextReview && moment(d.nextReview).toDate() < now).length
-          }
+            due: thisDeckData.filter((d) => d.nextReview && moment(d.nextReview).toDate() < now).length,
+          },
         })
       }
     }
 
     const { q } = req.body
 
-    const deckData = await DB.parseCond(q || {}, {
+    const deckData = await db.parseCond(q || {}, {
       fields: {
-        card: ['nextReview', 'srsLevel', 'deck', '_id']
-      }
+        card: ['nextReview', 'srsLevel', 'deck', '_id'],
+      },
     })
 
     const now = new Date()
@@ -153,21 +157,22 @@ const router = buildRouter(quizApiDefinition, (_) => _
     })
 
     return {
-      treeview: fullData
+      treeview: fullData,
     }
   })
-  .render(async (req) => {
-    const r = await DB.render(req.params.id)
+
+  router.post('/quiz/id', async (req) => {
+    const r = await db.render(req.body.id)
     return r
   })
-  .right(async (req, res) => {
-    await DB.markRight(req.params.id)
-    res.sendStatus(201)
-  })
-  .wrong(async (req, res) => {
-    await DB.markWrong(req.params.id)
-    res.sendStatus(201)
-  })
-)
 
-export default router
+  router.put('/quiz/id', async (req, res) => {
+    await db.markRight(req.body.id)
+    res.sendStatus(201)
+  })
+
+  router.delete('/quiz/id', async (req, res) => {
+    await db.markWrong(req.body.id)
+    res.sendStatus(201)
+  })
+}

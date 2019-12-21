@@ -1,5 +1,5 @@
 <template lang="pug">
-iframe(:src="iframeUrl" frameborder="0")
+iframe(:srcdoc="html" frameborder="0")
 </template>
 
 <script lang="ts">
@@ -7,26 +7,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 @Component
 export default class MyIframe extends Vue {
-  @Prop({ default: '' }) html!: string;
-
-  get iframeUrl () {
-    return `/reveal.html`
-  }
-
-  mounted () {
-    const iframe = this.$el as HTMLIFrameElement
-    iframe.onload = () => {
-      this.updateHtml()
-    }
-  }
-
-  @Watch('html')
-  updateHtml () {
-    const iframe = this.$el as HTMLIFrameElement
-    if (iframe.contentDocument) {
-      iframe.contentDocument.body.innerHTML = this.html
-    }
-  }
+  @Prop({ default: '' }) html!: string
 }
 </script>
 

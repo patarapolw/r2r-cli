@@ -5,7 +5,7 @@ export const quizState = {
   isQuizStarted: false,
   q: '',
   currentDeck: '',
-  mediaQuery: matchMedia('(max-width: 1000px), (screen and (-webkit-device-pixel-ratio:3)))')
+  mediaQuery: matchMedia('(max-width: 1000px), (screen and (-webkit-device-pixel-ratio:3)))'),
 }
 
 export default quizState

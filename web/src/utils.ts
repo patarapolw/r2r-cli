@@ -6,18 +6,18 @@ const anchorAttributes = {
   regex: /()\((.+=".+" ?)+\)/g,
   replace: (match: string, $1: string, $2: string) => {
     return $1.replace('">', `" ${$2}>`)
-  }
+  },
 }
 
 const furiganaParser = {
   type: 'output',
   regex: /{([^}]+)}\(([^)]+)\)/g,
-  replace: '<ruby>$1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>'
+  replace: '<ruby>$1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>',
 }
 
 const mdConverter = new showdown.Converter({
   tables: true,
-  extensions: [anchorAttributes, furiganaParser]
+  extensions: [anchorAttributes, furiganaParser],
 })
 
 export function md2html (s: string, d: any): string {
@@ -47,7 +47,7 @@ export function fixData (d: any): any {
 export function quizDataToContent (
   data: any,
   side: 'front' | 'back' | 'note' | 'backAndNote' | null,
-  template?: string
+  template?: string,
 ): string {
   function cleanHtml (s: string) {
     const cleaned = s.replace(/@([^\n]+)\n/g, '')
@@ -72,15 +72,15 @@ export function quizDataToContent (
   ${data.css ? cleanCssJs(data.css, 'css') : `<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">`}
   ${side === 'backAndNote'
     ? cleanHtml(data.back || '') + '\n<br/>\n' + cleanHtml(data.note || '') : cleanHtml(
-      (side ? data[side] : template) || ''
+      (side ? data[side] : template) || '',
     )}
   ${!data.js ? `<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>` : cleanCssJs(data.js, 'js')}
   `
 }
 
 export function ankiMustache (s: string, d: {
-  front?: string;
-  data?: Record<string, any>;
+  front?: string
+  data?: Record<string, any>
 }): string {
   s = s.replace(/\{\{FrontSide}}/g, (d.front || '').replace(/@[^\n]+\n/g, ''))
 
@@ -136,7 +136,7 @@ export function slowClick ($selector: JQuery) {
 
   $selector.addClass('animated')
   $selector.css({
-    'animation-duration': `${duration}ms`
+    'animation-duration': `${duration}ms`,
   })
   setTimeout(() => {
     $selector.prop('disabled', false)

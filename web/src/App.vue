@@ -9,7 +9,7 @@
       fontawesome(:icon="['fas', 'file-import']")
     b-nav-item(v-b-tooltip.hover.right title="Settings" to="/settings")
       fontawesome(:icon="['fas', 'cog']")
-    b-nav-item(v-b-tooltip.hover.right title="GitHub" @click="openInExternal('https://github.com/patarapolw/rep2recall-app')")
+    b-nav-item(v-b-tooltip.hover.right title="GitHub" @click="openInExternal('https://github.com/patarapolw/r2r-cli')")
       fontawesome(:icon="['fab', 'github']")
   .body
     router-view

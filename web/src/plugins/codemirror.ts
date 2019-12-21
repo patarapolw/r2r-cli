@@ -14,6 +14,6 @@ Vue.use(VueCodemirror, {
     lineWrapping: true,
     autoRefresh: true,
     theme: 'base16-light',
-    autoCloseBrackets: true
-  }
+    autoCloseBrackets: true,
+  },
 })

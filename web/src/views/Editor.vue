@@ -73,28 +73,28 @@ import { fixData, quizDataToContent } from '../utils'
 @Component({
   components: {
     EntryEditor,
-    MyIframe
-  }
+    MyIframe,
+  },
 })
 export default class Editor extends Vue {
-  q = '';
-  offset = 0;
-  limit = 10;
-  count = 0;
-  sortBy = 'deck';
-  desc = false;
-  data: any[] = [];
-  checkedIds: Set<string> = new Set();
-  allCardsSelected = false;
-  isLoading = false;
-  newDeckName = '';
-  newTagName = '';
-  isAddTags = false;
+  q = ''
+  offset = 0
+  limit = 10
+  count = 0
+  sortBy = 'deck'
+  desc = false
+  data: any[] = []
+  checkedIds: Set<string> = new Set()
+  allCardsSelected = false
+  isLoading = false
+  newDeckName = ''
+  newTagName = ''
+  isAddTags = false
 
   colWidths = {
     checkbox: 50,
-    extra: 250
-  };
+    extra: 250,
+  }
 
   mounted () {
     this.fetchData()
@@ -129,20 +129,20 @@ export default class Editor extends Vue {
         ...[
           {
             name: 'source',
-            label: 'Source'
+            label: 'Source',
           },
           {
             name: 'template',
-            label: 'Template'
-          }
-        ]
+            label: 'Template',
+          },
+        ],
       )
     }
 
     extraCols.forEach(c => {
       cols.push({
         name: `@${c}`,
-        label: c[0].toLocaleUpperCase() + c.substr(1)
+        label: c[0].toLocaleUpperCase() + c.substr(1),
       })
     })
 
@@ -186,7 +186,7 @@ export default class Editor extends Vue {
 
   async deleteCards () {
     const r = await this.$bvModal.msgBoxConfirm(
-      'Are you sure you want to delete the following cards'
+      'Are you sure you want to delete the following cards',
     )
 
     if (r) {
@@ -194,7 +194,7 @@ export default class Editor extends Vue {
       await api.request({
         url: '/editor/',
         method: 'DELETE',
-        data: { ids: Array.from(this.checkedIds) }
+        data: { ids: Array.from(this.checkedIds) },
       })
       this.fetchData()
     }
@@ -208,8 +208,8 @@ export default class Editor extends Vue {
         method: 'PUT',
         data: {
           ids: Array.from(this.checkedIds),
-          update: { deck: this.newDeckName }
-        }
+          update: { deck: this.newDeckName },
+        },
       })
       this.fetchData()
     }
@@ -229,8 +229,8 @@ export default class Editor extends Vue {
         method: 'PUT',
         data: {
           ids: Array.from(this.checkedIds),
-          tags: this.newTagName.split(' ')
-        }
+          tags: this.newTagName.split(' '),
+        },
       })
     } else {
       await api.request({
@@ -238,8 +238,8 @@ export default class Editor extends Vue {
         method: 'DELETE',
         data: {
           ids: Array.from(this.checkedIds),
-          tags: this.newTagName.split(' ')
-        }
+          tags: this.newTagName.split(' '),
+        },
       })
     }
 
@@ -289,8 +289,8 @@ export default class Editor extends Vue {
       method: 'POST',
       data: {
         q: this.q,
-        type: 'all'
-      }
+        type: 'all',
+      },
     })).data
     this.checkedIds = new Set(ids)
     this.allCardsSelected = true
@@ -369,9 +369,9 @@ export default class Editor extends Vue {
         limit: this.limit,
         sort: {
           key: this.sortBy,
-          desc: this.desc
-        }
-      }
+          desc: this.desc,
+        },
+      },
     })).data
 
     this.data = r.data.map((d: any) => fixData(d))

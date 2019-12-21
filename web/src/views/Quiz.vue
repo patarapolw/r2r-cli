@@ -49,16 +49,16 @@ import { api } from '../global'
   components: {
     TreeviewItem,
     EntryEditor,
-    MyIframe
-  }
+    MyIframe,
+  },
 })
 export default class Quiz extends Vue {
-  isLoading = true;
-  data: ITreeViewItem[] = [];
-  q = '';
+  isLoading = true
+  data: ITreeViewItem[] = []
+  q = ''
 
-  quizIds: string[] = [];
-  currentQuizIndex: number = -1;
+  quizIds: string[] = []
+  currentQuizIndex: number = -1
   quizContentPrefix =
     `
     <` +
@@ -68,11 +68,11 @@ export default class Quiz extends Vue {
         parent.$("#quiz-modal").trigger(parent.$.Event(type, {key}));
     });
     <` +
-    `/script>`;
-  quizContent = '';
-  quizShownAnswer = false;
-  quizData: any = {};
-  selectedDeck = '';
+    `/script>`
+  quizContent = ''
+  quizShownAnswer = false
+  quizData: any = {}
+  selectedDeck = ''
 
   mounted () {
     this.getTreeViewData()
@@ -99,7 +99,7 @@ export default class Quiz extends Vue {
       },
       previous () {
         slowClick($('.quiz-previous'))
-      }
+      },
     }
 
     switch (evt.key) {
@@ -130,7 +130,7 @@ export default class Quiz extends Vue {
         slowClick($('.quiz-edit'))
         break
       default:
-        console.log(evt.key)
+        console.error(evt.key)
     }
   }
 
@@ -152,31 +152,31 @@ export default class Quiz extends Vue {
     const { ids } = (await api.request({
       url: '/quiz/',
       method: 'POST',
-      data: { deck, q: this.q, type }
+      data: { deck, q: this.q, type },
     })).data
 
     this.quizIds = shuffle(ids)
     this.quizContent = h(
       'div',
-      `${ids.length.toLocaleString()} entries to go...`
+      `${ids.length.toLocaleString()} entries to go...`,
     ).outerHTML
     if (ids.length === 0) {
       const [nextHour, nextDay] = await Promise.all([
         api.request({
           url: '/quiz/',
           method: 'POST',
-          data: { deck, q: this.q, type, due: '1h' }
+          data: { deck, q: this.q, type, due: '1h' },
         }),
         api.request({
           url: '/quiz/',
           method: 'POST',
-          data: { deck, q: this.q, type, due: '1d' }
-        })
+          data: { deck, q: this.q, type, due: '1d' },
+        }),
       ])
 
       this.quizContent += h('div', [
         h('div', `Pending next hour: ${nextHour.data.ids.length.toLocaleString()}`),
-        h('div', `Pending next day: ${nextDay.data.ids.length.toLocaleString()}`)
+        h('div', `Pending next day: ${nextDay.data.ids.length.toLocaleString()}`),
       ]).outerHTML
     }
   }
@@ -188,12 +188,12 @@ export default class Quiz extends Vue {
       const { ids } = (await api.request({
         url: '/quiz/',
         method: 'POST',
-        data: { deck, q: this.q, type: 'all' }
+        data: { deck, q: this.q, type: 'all' },
       })).data
       await api.request({
         url: '/editor/',
         method: 'DELETE',
-        data: { ids }
+        data: { ids },
       })
       await this.$bvModal.msgBoxOk(`Deleted ${deck}`)
       this.$forceUpdate()
@@ -237,7 +237,7 @@ export default class Quiz extends Vue {
       await api.request({
         url: '/quiz/id',
         method: 'PUT',
-        data: { id }
+        data: { id },
       })
       await this.onQuizNextButtonClicked()
     }
@@ -249,7 +249,7 @@ export default class Quiz extends Vue {
       await api.request({
         url: '/quiz/id',
         method: 'DELETE',
-        data: { id }
+        data: { id },
       })
       await this.onQuizNextButtonClicked()
     }
@@ -267,7 +267,7 @@ export default class Quiz extends Vue {
     this.data = (await api.request({
       url: '/quiz/treeview',
       method: 'POST',
-      data: { q: this.q }
+      data: { q: this.q },
     })).data.treeview
     this.isLoading = false
   }
@@ -279,7 +279,7 @@ export default class Quiz extends Vue {
       this.quizData = (await api.request({
         url: '/quiz/id',
         method: 'POST',
-        data: { id }
+        data: { id },
       })).data
       this.quizContent = quizDataToContent(this.quizData, 'front')
     }

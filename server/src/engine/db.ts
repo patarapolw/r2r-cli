@@ -10,76 +10,76 @@ import { IEntry } from '@r2r/api-definition/dist/shared'
 
 @Table({ timestamp: true })
 export class DbSource {
-  @primary() _id!: string;
-  @prop() name!: string;
-  @prop({ unique: true, null: true }) h?: string;
+  @primary() _id!: string
+  @prop() name!: string
+  @prop({ unique: true, null: true }) h?: string
 }
 
 @Table({ unique: [['sourceId', 'name']] })
 export class DbTemplate {
-  @primary() _id!: string;
-  @prop({ references: 'source(id)', null: true }) sourceId?: string;
-  @prop() name!: string;
-  @prop() front!: string;
-  @prop({ null: true }) back?: string;
-  @prop({ null: true }) css?: string;
-  @prop({ null: true }) js?: string;
+  @primary() _id!: string
+  @prop({ references: 'source(id)', null: true }) sourceId?: string
+  @prop() name!: string
+  @prop() front!: string
+  @prop({ null: true }) back?: string
+  @prop({ null: true }) css?: string
+  @prop({ null: true }) js?: string
 }
 
 @Table()
 export class DbNote {
-  @primary() _id!: string;
-  @prop({ references: 'source(id)', null: true }) sourceId?: string;
-  @prop({ default: '{}' }) meta?: Record<string, any>;
-  @prop() data!: Record<string, any>;
-  @prop({ null: true, unique: true }) h?: string;
+  @primary() _id!: string
+  @prop({ references: 'source(id)', null: true }) sourceId?: string
+  @prop({ default: '{}' }) meta?: Record<string, any>
+  @prop() data!: Record<string, any>
+  @prop({ null: true, unique: true }) h?: string
 }
 
 @Table()
 export class DbMedia {
-  @primary() _id!: string;
-  @prop({ references: 'source(id)', null: true }) sourceId?: string;
-  @prop({ default: '{}' }) meta?: Record<string, any>;
-  @prop() data!: ArrayBuffer;
-  @prop({ null: true, unique: true }) h?: string;
+  @primary() _id!: string
+  @prop({ references: 'source(id)', null: true }) sourceId?: string
+  @prop({ default: '{}' }) meta?: Record<string, any>
+  @prop() data!: ArrayBuffer
+  @prop({ null: true, unique: true }) h?: string
 }
 
 @Table({ timestamp: true })
 export class DbCard {
-  @primary() _id!: string;
-  @prop() deck!: string;
-  @prop({ references: 'template(id)', null: true }) templateId?: string;
-  @prop({ references: 'note(id)', null: true }) noteId?: string;
-  @prop({ null: true }) front?: string;
-  @prop({ null: true }) back?: string;
-  @prop({ null: true }) mnemonic?: string;
-  @prop({ type: 'integer', null: true }) srsLevel?: number;
-  @prop({ null: true }) nextReview?: Date;
-  @prop({ type: 'StrArray', null: true }) tag?: string[];
-  @prop({ default: {} }) stat?: Record<string, any>;
+  @primary() _id!: string
+  @prop() deck!: string
+  @prop({ references: 'template(id)', null: true }) templateId?: string
+  @prop({ references: 'note(id)', null: true }) noteId?: string
+  @prop({ null: true }) front?: string
+  @prop({ null: true }) back?: string
+  @prop({ null: true }) mnemonic?: string
+  @prop({ type: 'integer', null: true }) srsLevel?: number
+  @prop({ null: true }) nextReview?: Date
+  @prop({ type: 'StrArray', null: true }) tag?: string[]
+  @prop({ default: {} }) stat?: Record<string, any>
 }
 
 interface ICondOptions {
-  offset?: number;
-  limit?: number;
+  offset?: number
+  limit?: number
   sort?: {
-    key: string;
-    desc?: boolean;
+    key: string
+    desc?: boolean
   }
-  fields?: Record<string, string[]>;
+  fields?: Record<string, string[]>
 }
 
 export default class Db {
-  db!: LiteDb;
-  source!: Collection<DbSource>;
-  template!: Collection<DbTemplate>;
-  media!: Collection<DbMedia>;
-  note!: Collection<DbNote>;
-  card!: Collection<DbCard>;
+  db!: LiteDb
+  source!: Collection<DbSource>
+  template!: Collection<DbTemplate>
+  media!: Collection<DbMedia>
+  note!: Collection<DbNote>
+  card!: Collection<DbCard>
 
   constructor (
     public filename: string,
-    public callback?: (res: any) => any
+    public callback?: (res: any) => any,
   ) { }
 
   async init () {
@@ -207,7 +207,7 @@ export default class Db {
 
   async parseCond (
     cond: string | Record<string, any>,
-    options: ICondOptions = {}
+    options: ICondOptions = {},
   ): Promise<Partial<IEntry>[]> {
     if (typeof cond === 'string') {
       cond = parseQ(cond)

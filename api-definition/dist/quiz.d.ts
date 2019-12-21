@@ -1,15 +1,15 @@
 interface ITreeViewStat {
-  new: number;
-  leech: number;
-  due: number;
+  new: number
+  leech: number
+  due: number
 }
 
 export interface ITreeViewItem {
-  name: string;
-  fullName: string;
-  isOpen: boolean;
-  children?: ITreeViewItem[];
-  stat: ITreeViewStat;
+  name: string
+  fullName: string
+  isOpen: boolean
+  children?: ITreeViewItem[]
+  stat: ITreeViewStat
 }
 
 export default interface IQuizApi {

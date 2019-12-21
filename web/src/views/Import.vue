@@ -23,8 +23,8 @@ import io from 'socket.io-client'
 
 @Component
 export default class Import extends Vue {
-  importFile: File | null = null;
-  progress: any = {};
+  importFile: File | null = null
+  progress: any = {}
 
   getProgressPercent () {
     return (
@@ -51,7 +51,7 @@ export default class Import extends Vue {
     (this.$refs.uploadModal as any).show()
 
     this.progress = {
-      text: 'Uploading...'
+      text: 'Uploading...',
     }
 
     const xhr = new XMLHttpRequest()
@@ -59,13 +59,13 @@ export default class Import extends Vue {
       Object.assign(this.progress, {
         text: `Uploading ${this.importFile!.name}`,
         current: evt.loaded / evt.total,
-        max: 1
+        max: 1,
       })
     }
     xhr.onload = () => {
       Object.assign(this.progress, {
         text: `Parsing ${this.importFile!.name}`,
-        max: 0
+        max: 0,
       })
       const { id } = JSON.parse(xhr.responseText)
       const ws = io(location.origin)
@@ -75,7 +75,7 @@ export default class Import extends Vue {
         if (!started) {
           ws.send({
             id,
-            type: /\.[^.]+$/.exec(this.importFile!.name)![0]
+            type: /\.[^.]+$/.exec(this.importFile!.name)![0],
           })
           started = true
         }
@@ -88,7 +88,7 @@ export default class Import extends Vue {
             ws.close()
           }
         } catch (e) {
-          console.log(msg)
+          console.error(msg)
         }
       })
     }

@@ -14,11 +14,11 @@ import { normalizeArray } from '../utils'
 
 @Component
 export default class DatetimeNullable extends Vue {
-  @Prop({ required: true }) width!: number;
-  @Prop({ required: true }) value!: string;
-  @Prop() readonly?: boolean;
+  @Prop({ required: true }) width!: number
+  @Prop({ required: true }) value!: string
+  @Prop() readonly?: boolean
 
-  flatpickr?: flatpickr.Instance;
+  flatpickr?: flatpickr.Instance
 
   mounted () {
     this.flatpickr = normalizeArray(
@@ -31,8 +31,8 @@ export default class DatetimeNullable extends Vue {
           if (dates.length > 0) {
             this.setDate(dates[0])
           }
-        }
-      })
+        },
+      }),
     )
   }
 

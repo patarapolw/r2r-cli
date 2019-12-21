@@ -1,6 +1,8 @@
 export default interface IMediaApi {
   '/media/*': {
-    GET: {}
+    GET: {
+      params: [string]
+    }
   }
   '/media/': {
     POST: {

@@ -1,18 +1,26 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   'extends': [
     'plugin:vue/essential',
     '@vue/standard',
-    '@vue/typescript'
+    '@vue/typescript',
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'comma-dangle': ['error', 'always-multiline'],
+    'semi': 'off',
+    '@typescript-eslint/semi': ['error', 'never'],
+    '@typescript-eslint/member-delimiter-style': ['error', {
+      'multiline': {
+        'delimiter': 'none',
+      },
+    }],
   },
   parserOptions: {
-    parser: '@typescript-eslint/parser'
-  }
+    parser: '@typescript-eslint/parser',
+  },
 }

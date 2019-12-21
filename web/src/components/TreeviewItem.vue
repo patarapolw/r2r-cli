@@ -19,34 +19,34 @@ import quizState from '../states/quiz'
 import $ from 'jquery'
 
 interface ITreeViewStat {
-  new: number;
-  leech: number;
-  due: number;
+  new: number
+  leech: number
+  due: number
 }
 
 export interface ITreeViewItem {
-  name: string;
-  fullName: string;
-  isOpen: boolean;
-  children?: ITreeViewItem[];
-  stat: ITreeViewStat;
+  name: string
+  fullName: string
+  isOpen: boolean
+  children?: ITreeViewItem[]
+  stat: ITreeViewStat
 }
 
 @Component({
-  name: 'treeview-item'
+  name: 'treeview-item',
 })
 export default class TreeviewItem extends Vue {
-  @Prop({ required: true }) data!: ITreeViewItem;
-  @Prop({ required: true }) q!: string;
-  @Prop({ required: true }) parentIsOpen!: boolean;
-  @Prop({ required: true }) onReview!: (deck: string, type?: string) => any;
-  @Prop({ required: true }) onDelete!: (deck: string) => Promise<boolean>;
+  @Prop({ required: true }) data!: ITreeViewItem
+  @Prop({ required: true }) q!: string
+  @Prop({ required: true }) parentIsOpen!: boolean
+  @Prop({ required: true }) onReview!: (deck: string, type?: string) => any
+  @Prop({ required: true }) onDelete!: (deck: string) => Promise<boolean>
 
-  isOpen = false;
-  isShownStat = true;
-  isDeleted = false;
+  isOpen = false
+  isShownStat = true
+  isDeleted = false
 
-  state = quizState;
+  state = quizState
 
   constructor (props: any) {
     super(props)
@@ -63,19 +63,19 @@ export default class TreeviewItem extends Vue {
       all: () => this.startReview('all'),
       exportDeck: () => {
         location.href = `/api/io/export?deck=${encodeURIComponent(
-          this.data.fullName
+          this.data.fullName,
         )}`
       },
       exportDeckAndReset: () => {
         location.href = `/api/io/export?deck=${encodeURIComponent(
-          this.data.fullName
+          this.data.fullName,
         )}&reset=true`
       },
       delete: async () => {
         if (await this.onDelete(this.data.fullName)) {
           this.isDeleted = true
         }
-      }
+      },
     })
     this.updateStat()
   }

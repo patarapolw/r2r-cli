@@ -17,7 +17,7 @@ import { api } from '../global'
 
 @Component
 export default class Settings extends Vue {
-  mediaFolder = '';
+  mediaFolder = ''
 
   async onResetDatabaseClicked () {
     const r = await this.$bvModal.msgBoxConfirm(
@@ -25,7 +25,7 @@ export default class Settings extends Vue {
 
     if (r) {
       const rDelete = await fetch(`/api/reset`, {
-        method: 'DELETE'
+        method: 'DELETE',
       })
       if (rDelete.status === 200) {
         this.$bvModal.msgBoxOk('Database is reset')

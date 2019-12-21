@@ -1,24 +1,31 @@
-import { MEDIA_FOLDER, DB } from '../global'
-import fs from 'fs'
 import path from 'path'
-import { buildRouter } from 'rest-ts-express'
-import mediaApiDefinition from '@/api-definitions/media'
+import { IMediaApi } from '@r2r/api-definition'
+import RestypedRouter from 'restyped-express-async'
+import { Router } from 'express'
+import Db from '../engine/db'
+import fs from 'fs'
 
-const router = buildRouter(mediaApiDefinition, (_) => _
-  .get(async (req, res) => {
+export default (app: Router, config: {
+  mediaFolder: string
+  db: Db
+}) => {
+  const router = RestypedRouter<IMediaApi>(app)
+
+  router.get('/media/*', async (req, res) => {
     const id = req.params[0]
-    const m = (await DB.media.find({ _id: id }, ['data'], 'LIMIT 1'))[0]
+    const m = (await config.db.media.find({ _id: id }, ['data'], 'LIMIT 1'))[0]
     if (m) {
       res.send(m.data || '')
+    } else if (fs.existsSync(path.join(config.mediaFolder, req.params[0]))) {
+      res.sendFile(path.join(config.mediaFolder, req.params[0]))
     } else {
-      res.sendFile(path.join(MEDIA_FOLDER, req.params[0]))
+      res.sendStatus(404)
     }
   })
-  .path(async () => {
-    return {
-      folder: MEDIA_FOLDER
-    }
-  })
-)
 
-export default router
+  router.post('/media/', async () => {
+    return {
+      path: config.mediaFolder,
+    }
+  })
+}

@@ -16,23 +16,23 @@ import MyIframe from './MyIframe.vue'
 
 @Component({
   components: {
-    MyIframe
-  }
+    MyIframe,
+  },
 })
 export default class MarkdownEditor extends Vue {
-  @Prop() required?: boolean;
-  @Prop({ default: '' }) value!: string;
-  @Prop() invalidFeedback?: string;
-  @Prop({ required: true }) data: any;
+  @Prop() required?: boolean
+  @Prop({ default: '' }) value!: string
+  @Prop() invalidFeedback?: string
+  @Prop({ required: true }) data: any
 
-  html: string = '';
+  html: string = ''
 
   @Emit('input')
   onValueChanged (newValue: string) {
     this.html = quizDataToContent(
       this.data,
       null,
-      ankiMustache(newValue, this.data)
+      ankiMustache(newValue, this.data),
     )
     return newValue
   }

@@ -12,9 +12,9 @@ export default interface IEditorApi {
           key: string
           desc?: boolean
         }
-      },
+      }
       response: {
-        data: Partial<IEntry>[],
+        data: Partial<IEntry>[]
         count: number
       }
     }

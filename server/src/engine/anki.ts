@@ -8,12 +8,12 @@ import uuid4 from 'uuid/v4'
 import { IEntry } from '@r2r/api-definition/dist/shared'
 
 export default class Anki {
-  private db!: sqlite.Database;
-  private mediaNameToId: any = {};
-  private filename: string;
-  private filepath: string;
-  private dir: string;
-  private callback: (res: any) => any;
+  private db!: sqlite.Database
+  private mediaNameToId: any = {}
+  private filename: string
+  private filepath: string
+  private dir: string
+  private callback: (res: any) => any
 
   constructor (filepath: string, filename: string, callback: (res: any) => any) {
     this.filename = filename
@@ -26,7 +26,7 @@ export default class Anki {
 
     this.callback({
       text: `Unzipping Apkg. File count: ${zipCount}`,
-      max: 0
+      max: 0,
     })
 
     zip.extractAllTo(this.dir)
@@ -37,7 +37,7 @@ export default class Anki {
 
     this.callback({
       text: 'Preparing Anki resources.',
-      max: 0
+      max: 0,
     })
 
     const { decks, models } = await this.db.get('SELECT decks, models FROM col')
@@ -83,7 +83,7 @@ export default class Anki {
 
     this.callback({
       text: 'Writing to database',
-      max: 0
+      max: 0,
     })
 
     const sourceId = uuid4()
@@ -92,11 +92,11 @@ export default class Anki {
       await dst.source.create({
         _id: sourceId,
         name: this.filename,
-        h: sourceH
+        h: sourceH,
       })
     } catch (e) {
       this.callback({
-        error: `Duplicated resource: ${this.filename}`
+        error: `Duplicated resource: ${this.filename}`,
       })
       return
     }
@@ -112,14 +112,14 @@ export default class Anki {
         sourceId,
         name: mediaJson[k],
         data,
-        h
+        h,
       }
 
       const total = Object.keys(mediaJson).length
       this.callback({
         text: 'Uploading media',
         current: i,
-        max: total
+        max: total,
       })
 
       let mediaId: string
@@ -130,7 +130,7 @@ export default class Anki {
         mediaId = uuid4()
         await dst.media.create({
           _id: mediaId,
-          ...media
+          ...media,
         })
       }
 
@@ -149,7 +149,7 @@ export default class Anki {
         front: this.convertLink(qfmt as string),
         back: this.convertLink(afmt as string),
         css: this.convertLink(css as string),
-        sourceId
+        sourceId,
       })
     }))
 
@@ -184,7 +184,7 @@ export default class Anki {
         this.callback({
           text: 'Reading notes',
           current,
-          max: count
+          max: count,
         })
       }
       current++
@@ -217,16 +217,16 @@ export default class Anki {
       entries.push({
         deck: (deck as string).replace(/::/g, '/'),
         template: {
-          name: `${mname}/${tname}`
+          name: `${mname}/${tname}`,
         },
         note: {
           meta: { order },
-          data
+          data,
         },
         source: {
-          h: sourceH
+          h: sourceH,
         },
-        tag
+        tag,
       })
     });
 
@@ -240,7 +240,7 @@ export default class Anki {
         this.callback({
           text: 'Uploading notes',
           current: from,
-          max: total
+          max: total,
         })
 
         dst.insertMany(subList)
@@ -270,7 +270,7 @@ export function ankiMustache (s: string, d?: Record<string, any>, front: string 
   for (const [k, v] of Object.entries(d)) {
     s = s.replace(
       new RegExp(`{{(\\S+:)?${escapeRegExp(k)}}}`, 'g'),
-      v.replace(/^@[^\n]+\n/gs, '')
+      v.replace(/^@[^\n]+\n/gs, ''),
     )
   }
 

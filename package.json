@@ -14,5 +14,17 @@
     "api-definition",
     "server",
     "web"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-plugin-json": "^2.0.1"
+  },
+  "dependencies": {
+    "wsrun": "^5.2.0"
+  },
+  "bin": {
+    "r2r": "./server/dist/cli.js"
+  },
+  "scripts": {
+    "postinstall": "wsrun --exclude-missing build"
+  }
 }

@@ -4,7 +4,7 @@ import 'jquery-contextmenu/dist/jquery.contextMenu.min.css'
 
 declare global {
   interface JQueryStatic {
-    contextMenu: any;
+    contextMenu: any
   }
 }
 
@@ -26,10 +26,10 @@ $(() => {
         name: 'Export',
         items: {
           exportDeck: { name: 'Export Deck' },
-          exportDeckAndReset: { name: 'Export Deck and Reset' }
-        }
+          exportDeckAndReset: { name: 'Export Deck and Reset' },
+        },
       },
-      delete: { name: 'Delete deck' }
-    }
+      delete: { name: 'Delete deck' },
+    },
   })
 })
