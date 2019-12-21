@@ -11,9 +11,13 @@
   "license": "MIT",
   "repository": "github:patarapolw/r2r-cli",
   "files": [
-    "dist"
+    "dist",
+    "package.json"
   ],
   "scripts": {
     "build": "echo 'There is no need to run tsc, yet'"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

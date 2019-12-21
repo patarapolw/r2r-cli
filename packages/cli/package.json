@@ -50,6 +50,12 @@
     "typescript": "^3.7.4"
   },
   "files": [
-    "dist"
-  ]
+    "dist",
+    "src",
+    "tsconfig.json",
+    "package.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
