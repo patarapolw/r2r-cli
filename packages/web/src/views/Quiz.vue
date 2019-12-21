@@ -38,12 +38,13 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 import { quizDataToContent, shuffle, slowClick } from '../utils'
-import TreeviewItem, { ITreeViewItem } from '../components/TreeviewItem.vue'
+import TreeviewItem from '../components/TreeviewItem.vue'
 import EntryEditor from '../components/EntryEditor.vue'
 import MyIframe from '../components/MyIframe.vue'
 import $ from 'jquery'
 import h from 'hyperscript'
 import { api } from '../global'
+import { ITreeViewItem } from '@r2r/api-definition/dist/quiz'
 
 @Component({
   components: {

@@ -6,7 +6,7 @@ import moment from 'moment'
 import dotProp from 'dot-prop'
 import { ankiMustache } from './anki'
 import { srsMap, getNextReview, repeatReview } from './quiz'
-import { IEntry } from '@r2r/api-definition/dist/shared'
+import { IEntry } from '@r2r/api-definition'
 
 @Table({ timestamp: true })
 export class DbSource {

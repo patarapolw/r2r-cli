@@ -5,7 +5,7 @@ import Db from './db'
 import SparkMD5 from 'spark-md5'
 import sqlite from 'sqlite'
 import uuid4 from 'uuid/v4'
-import { IEntry } from '@r2r/api-definition/dist/shared'
+import { IEntry } from '@r2r/api-definition'
 
 export default class Anki {
   private db!: sqlite.Database

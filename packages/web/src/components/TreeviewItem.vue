@@ -17,20 +17,7 @@ li.treeview(v-if="!isDeleted")
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import quizState from '../states/quiz'
 import $ from 'jquery'
-
-interface ITreeViewStat {
-  new: number
-  leech: number
-  due: number
-}
-
-export interface ITreeViewItem {
-  name: string
-  fullName: string
-  isOpen: boolean
-  children?: ITreeViewItem[]
-  stat: ITreeViewStat
-}
+import { ITreeViewItem } from '@r2r/api-definition/dist/quiz'
 
 @Component({
   name: 'treeview-item',

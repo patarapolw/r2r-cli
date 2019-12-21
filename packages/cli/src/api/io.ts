@@ -42,8 +42,8 @@ export default (app: Router, io: SocketIO.Server, config: {
 
     const xdb = new Db(path.join(config.tmpFolder, fileId), () => { })
     await xdb.init()
-    config.db.export({ deck: { $like: `${deck}/%` } }, xdb)
-    config.db.export({ deck }, xdb)
+    await config.db.export({ deck: { $like: `${deck}/%` } }, xdb)
+    await config.db.export({ deck }, xdb)
 
     res.download(path.join(config.tmpFolder, fileId))
   })
@@ -73,7 +73,7 @@ export default (app: Router, io: SocketIO.Server, config: {
             io.send(p)
           })
           await xdb.init()
-          xdb.export({}, config.db)
+          await xdb.export({}, config.db)
           io.send({})
         }
       } catch (e) {
