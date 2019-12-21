@@ -26,6 +26,6 @@
   },
   "scripts": {
     "build": "wsrun --exclude-missing build",
-    "prepare": "yarn build"
+    "postinstall": "yarn build"
   }
 }
