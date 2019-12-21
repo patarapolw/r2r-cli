@@ -1,6 +1,6 @@
 {
   "name": "@r2r/cli",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "index.js",
   "license": "MIT",
   "bin": {
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@r2r/api-definition": "^0.0.3",
-    "@r2r/web": "^0.0.4",
+    "@r2r/web": "^0.0.5",
     "adm-zip": "^0.4.13",
     "cors": "^2.8.5",
     "dot-prop": "^5.2.0",
