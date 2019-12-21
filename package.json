@@ -14,6 +14,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna exec -- yarn build"
+    "build": "lerna exec -- yarn build",
+    "help": "cd packages/cli && yarn run help"
   }
 }

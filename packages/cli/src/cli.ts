@@ -7,7 +7,7 @@ const { argv } = yargs
   .scriptName('r2r')
   .command('$0 <root>', 'Create or open in r2r', (y) => {
     y.positional('root', {
-      describe: 'Root as <root>/user.r2r',
+      describe: 'Run as <root>/user.r2r',
       type: 'string',
     })
   })
