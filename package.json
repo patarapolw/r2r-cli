@@ -1,7 +1,7 @@
 {
   "name": "r2r-cli",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "author": {
     "email": "patarapolw@gmail.com",
     "name": "Pacharapol Withayasakpunt",
@@ -22,9 +22,10 @@
     "wsrun": "^5.2.0"
   },
   "bin": {
-    "r2r": "./server/dist/cli.js"
+    "r2r": "./main.js"
   },
   "scripts": {
-    "prepare": "wsrun --exclude-missing build"
+    "build": "wsrun --exclude-missing build",
+    "prepare": "yarn build"
   }
 }
