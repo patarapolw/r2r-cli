@@ -26,6 +26,11 @@ Options:
   --help          Show help                                            [boolean]
 ```
 
+## Associated folders
+
+- `/media` will be created. You can put media files here (reference with `/media/filename.ext`)
+- `/tmp` will be created, and will be deleted when the program ended
+
 ## How is this created / works?
 
 This is made using [Lerna](https://lerna.js.org/) and [Vue CLI](https://cli.vuejs.org/) with Express.js server and [ResTyped](https://github.com/rawrmaan/restyped)
@@ -47,4 +52,4 @@ cd packages/cli
 yarn link
 ```
 
-- Now, you can use it anywhere with command `r2r <root>`
+- Now, you can use it anywhere with `yarn link @r2r/cli` and in `package.json` script section, `r2r <root>`
