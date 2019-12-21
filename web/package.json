@@ -29,7 +29,7 @@
     "jquery": "^3.4.1",
     "jquery-contextmenu": "^2.9.0",
     "lodash.merge": "^4.6.2",
-    "restyped-axios": "^2.0.0",
+    "restyped-axios": "https://github.com/patarapolw/restyped-axios.git",
     "showdown": "^1.9.1",
     "socket.io-client": "^2.3.0",
     "vue": "^2.6.10",
