@@ -1,7 +1,3 @@
 {
-  "eslint.workingDirectories": [
-    "./api-definition",
-    "./server",
-    "./web"
-  ]
+  "eslint.workingDirectories": []
 }

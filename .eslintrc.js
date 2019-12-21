@@ -18,7 +18,6 @@ module.exports = {
   },
   'plugins': [
     '@typescript-eslint',
-    'json',
   ],
   'rules': {
     'no-unused-vars': 0,

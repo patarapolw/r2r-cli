@@ -262,12 +262,66 @@ export default class Db {
   }
 
   async updateMany (ids: string[], u: Partial<IEntry>) {
-    if ([
-      // 'template',
-      'note',
-      // 'source'
-    ].some(Object.keys(u).includes)) {
+    while (ids.length > 900) {
+      const chunk = ids.splice(0, 900)
+      await this.updateMany(chunk, u)
+    }
 
+    let { template, note, source, stat, nextReview, ...card } = u
+
+    if (ids.length > 1 && (template || note || source || stat)) {
+      for (const id of ids) {
+        await this.updateMany([id], u)
+      }
+    }
+
+    if (template) {
+      const { templateId } = (await this.card.find({ _id: ids[0] }, ['templateId'], 'LIMIT 1'))[0] || {}
+      if (templateId) {
+        await this.template.update({ _id: templateId }, template)
+      }
+    } else if (note || source) {
+      const { noteId } = (await this.card.find({ _id: ids[0] }, ['noteId'], 'LIMIT 1'))[0] || {}
+      if (noteId) {
+        if (note) {
+          await this.note.update({ _id: noteId }, note)
+        }
+        if (source) {
+          const { sourceId } = (await this.note.find({ _id: noteId }, ['sourceId'], 'LIMIT 1'))[0] || {}
+          if (sourceId) {
+            await this.source.update({ _id: sourceId }, source)
+          }
+        }
+      }
+    } else if (stat) {
+      const { stat: newStat } = (await this.card.find({ _id: ids[0] }, ['stat'], 'LIMIT 1'))[0] || {}
+      if (newStat) {
+        Object.assign(stat, newStat)
+      }
+      await this.card.update({ _id: ids[0] }, { stat })
+    } else {
+      if (nextReview) {
+        card = card || {};
+        (card as any).nextReview = nextReview instanceof Date ? nextReview.toISOString() : nextReview
+      }
+
+      if (card) {
+        await this.card.update({ _id: { $in: ids } }, card)
+      }
+    }
+  }
+
+  async addTags (id: string, tags: string[]) {
+    const c = (await this.card.find({ _id: id }, ['tag'], 'LIMIT 1'))[0]
+    if (c) {
+      await this.card.update({ _id: id }, { tag: [...(c.tag || []), ...tags] })
+    }
+  }
+
+  async removeTags (id: string, tags: string[]) {
+    const c = (await this.card.find({ _id: id }, ['tag'], 'LIMIT 1'))[0]
+    if (c) {
+      await this.card.update({ _id: id }, { tag: (c.tag || []).filter((t: string) => !tags.includes(t)) })
     }
   }
 

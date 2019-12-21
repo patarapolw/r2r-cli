@@ -55,10 +55,7 @@ export default (app: Router, db: Db) => {
   router.put('/editor/tag', async (req, res) => {
     const { ids, tags } = req.body
     for (const id of ids) {
-      const c = (await db.card.find({ _id: id }, ['tag'], 'LIMIT 1'))[0]
-      if (c) {
-        await db.card.update({ _id: id }, { tag: [...(c.tag || []), ...tags] })
-      }
+      await db.addTags(id, tags)
     }
     res.sendStatus(201)
   })
@@ -66,10 +63,7 @@ export default (app: Router, db: Db) => {
   router.delete('/editor/tag', async (req, res) => {
     const { ids, tags } = req.body
     for (const id of ids) {
-      const c = (await db.card.find({ _id: id }, ['tag'], 'LIMIT 1'))[0]
-      if (c) {
-        await db.card.update({ _id: id }, { tag: (c.tag || []).filter((t: string) => !tags.includes(t)) })
-      }
+      await db.removeTags(id, tags)
     }
     res.sendStatus(201)
   })

@@ -48,7 +48,7 @@ export default class Anki {
         name    VARCHAR NOT NULL
     )`)
 
-    let stmt = await this.db.prepare('INSERT INTO decks (id, name) VALUES (?, ?)')
+    const stmt = await this.db.prepare('INSERT INTO decks (id, name) VALUES (?, ?)')
 
     await Promise.all(Object.values(JSON.parse(decks as string)).map(async (deck: any) => {
       await stmt.run([deck.id, deck.name])
