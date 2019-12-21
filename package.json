@@ -25,6 +25,6 @@
     "r2r": "./server/dist/cli.js"
   },
   "scripts": {
-    "postinstall": "wsrun --exclude-missing build"
+    "prepare": "wsrun --exclude-missing build"
   }
 }
