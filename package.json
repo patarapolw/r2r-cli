@@ -9,7 +9,8 @@
   "license": "MIT",
   "repository": "github:patarapolw/r2r-cli",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "next/*"
   ],
   "devDependencies": {
     "@typescript-eslint/parser": "^2.12.0",
