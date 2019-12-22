@@ -21,7 +21,7 @@
     "help": "node dist/cli.js --help",
     "build:src": "tsc",
     "build:web": "cd web && yarn build",
-    "prepack": "yarn build:ts && yarn build:web"
+    "prepack": "yarn build:src && yarn build:web"
   },
   "dependencies": {
     "dree": "^2.3.3",
