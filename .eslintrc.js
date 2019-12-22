@@ -1,35 +1,40 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es6': true,
-    'node': true,
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
   },
-  'extends': [
+  extends: [
     'standard',
+    'plugin:vue/essential',
+    '@vue/standard',
+    '@vue/typescript',
   ],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly',
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
   },
-  'parser': '@typescript-eslint/parser',
-  'parserOptions': {
-    'ecmaVersion': 2018,
-    'sourceType': 'module',
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    parser: '@typescript-eslint/parser',
   },
-  'plugins': [
+  plugins: [
     '@typescript-eslint',
   ],
-  'rules': {
+  rules: {
     'no-unused-vars': 0,
     'no-useless-constructor': 0,
     'no-cond-assign': 0,
     'no-undef': 0,
+    'quote-props': ['error', 'as-needed'],
     'comma-dangle': ['error', 'always-multiline'],
-    'semi': 'off',
+    semi: 'off',
     '@typescript-eslint/semi': ['error', 'never'],
     '@typescript-eslint/member-delimiter-style': ['error', {
-      'multiline': {
-        'delimiter': 'none',
+      multiline: {
+        delimiter: 'none',
       },
     }],
   },

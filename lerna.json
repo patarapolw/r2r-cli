@@ -1,7 +1,8 @@
 {
   "packages": [
-    "packages/*"
+    "next/*"
   ],
   "version": "independent",
-  "npmClient": "yarn"
+  "npmClient": "yarn",
+  "useWorkspaces": true
 }

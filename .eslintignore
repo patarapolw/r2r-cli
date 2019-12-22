@@ -1,4 +1,4 @@
-!.eslintrc
+!**/.eslintrc*
 node_modules
 dist
 *.svg

@@ -1,0 +1,49 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/vue-fontawesome": "^0.1.9",
+    "@types/codemirror": "^0.0.81",
+    "@types/highlight.js": "^9.12.3",
+    "@types/hyperscript": "^0.0.3",
+    "@types/node": "^12.12.21",
+    "@types/reveal": "^3.3.33",
+    "@types/showdown": "^1.9.3",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.1.0",
+    "codemirror": "^5.50.0",
+    "core-js": "^3.4.3",
+    "es6-json-stable-stringify": "^2.0.2",
+    "gray-matter": "^4.0.2",
+    "hyperpug": "^0.2.1",
+    "hyperscript": "^2.0.2",
+    "scope-css": "^1.2.1",
+    "showdown": "^1.9.1",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-codemirror": "^4.0.6",
+    "vue-property-decorator": "^8.3.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-typescript": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "sass": "^1.23.7",
+    "sass-loader": "^8.0.0",
+    "typescript": "~3.5.3",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}

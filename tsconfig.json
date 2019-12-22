@@ -1,0 +1,4 @@
+{
+  "extends": "./next/editor/web/tsconfig.json",
+  "include": ["packages/*/src"]
+}
