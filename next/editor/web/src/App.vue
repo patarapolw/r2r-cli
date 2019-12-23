@@ -58,7 +58,7 @@ export default class App extends Vue {
 
   get iframeUrl () {
     if (this.filename) {
-      const url = new URL(`${process.env.BASE_URL}/reveal.html`, location.origin)
+      const url = new URL(`${process.env.BASE_URL}/reveal-md/`, location.origin)
       url.searchParams.set('filename', this.filename)
       return url.href
     }

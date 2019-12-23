@@ -1,0 +1,3 @@
+[submodule "next/reveal-md-core"]
+	path = next/reveal-md-core
+	url = https://github.com/patarapolw/reveal-md-core.git

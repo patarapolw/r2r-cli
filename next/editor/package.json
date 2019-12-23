@@ -24,6 +24,7 @@
     "prepack": "yarn build:src && yarn build:web"
   },
   "dependencies": {
+    "@patarapolw/reveal-md-core": "*",
     "dree": "^2.3.3",
     "express": "^4.17.1",
     "open": "^7.0.0",

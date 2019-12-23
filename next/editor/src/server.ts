@@ -46,6 +46,7 @@ export function initServer (config: {
   app.use('/api', apiRouter)
   app.use(express.static(path.join(__dirname, '../dist/web')))
   app.use('/reveal', express.static(path.resolve(require.resolve('reveal.js'), '../..')))
+  app.use('/reveal-md', express.static(path.resolve(require.resolve('@patarapolw/reveal-md-core'), '..')))
 
   app.listen(config.port, () => {
     console.log(`Server running at http://localhost:${config.port}`)
