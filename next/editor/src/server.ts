@@ -45,19 +45,19 @@ export function initServer (config: {
 
   app.use('/api', apiRouter)
   app.use(express.static(path.join(__dirname, '../dist/web')))
-  app.use('/reveal', express.static(path.resolve(require.resolve('reveal.js'), '..')))
+  app.use('/reveal', express.static(path.resolve(require.resolve('reveal.js'), '../..')))
 
   app.listen(config.port, () => {
-    console.log(`Server running at http://localhost:${config.port}`);
+    console.log(`Server running at http://localhost:${config.port}`)
 
     if (config.open) {
       if (!config.filename || config.edit) {
-        open(`http://localhost:${config.port}/`);
+        open(`http://localhost:${config.port}/`)
       } else {
         open(`http://localhost:${config.port}/reveal/?${qs.stringify({
-          filename: config.filename
-        })}`);
+          filename: config.filename,
+        })}`)
       }
     }
-  });
+  })
 }

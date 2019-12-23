@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import "./plugins/bootstrap"
-import "./plugins/codemirror"
-import "./plugins/fontawesome"
+import './plugins/bootstrap'
+import './plugins/codemirror'
+import './plugins/fontawesome'
 
 Vue.config.productionTip = false
 
