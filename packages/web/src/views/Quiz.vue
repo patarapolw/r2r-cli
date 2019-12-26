@@ -69,7 +69,8 @@ export default class Quiz extends Vue {
         parent.$("#quiz-modal").trigger(parent.$.Event(type, {key}));
     });
     <` +
-    `/script>`
+    '/script>'
+
   quizContent = ''
   quizShownAnswer = false
   quizData: any = {}

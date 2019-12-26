@@ -276,25 +276,25 @@ export default class Db {
     }
 
     if (template) {
-      const { templateId } = (await this.card.find({ _id: ids[0] }, ['templateId'], 'LIMIT 1'))[0] || {}
+      const { templateId } = (await this.card.find({ _id: ids[0] }, ['templateId'], 'LIMIT 1'))[0] || {} as any
       if (templateId) {
         await this.template.update({ _id: templateId }, template)
       }
     } else if (note || source) {
-      const { noteId } = (await this.card.find({ _id: ids[0] }, ['noteId'], 'LIMIT 1'))[0] || {}
+      const { noteId } = (await this.card.find({ _id: ids[0] }, ['noteId'], 'LIMIT 1'))[0] || {} as any
       if (noteId) {
         if (note) {
           await this.note.update({ _id: noteId }, note)
         }
         if (source) {
-          const { sourceId } = (await this.note.find({ _id: noteId }, ['sourceId'], 'LIMIT 1'))[0] || {}
+          const { sourceId } = (await this.note.find({ _id: noteId }, ['sourceId'], 'LIMIT 1'))[0] || {} as any
           if (sourceId) {
             await this.source.update({ _id: sourceId }, source)
           }
         }
       }
     } else if (stat) {
-      const { stat: newStat } = (await this.card.find({ _id: ids[0] }, ['stat'], 'LIMIT 1'))[0] || {}
+      const { stat: newStat } = (await this.card.find({ _id: ids[0] }, ['stat'], 'LIMIT 1'))[0] || {} as any
       if (newStat) {
         Object.assign(stat, newStat)
       }

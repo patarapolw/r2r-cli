@@ -69,12 +69,12 @@ export function quizDataToContent (
   data = fixData(data)
 
   return `
-  ${data.css ? cleanCssJs(data.css, 'css') : `<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">`}
+  ${data.css ? cleanCssJs(data.css, 'css') : '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">'}
   ${side === 'backAndNote'
     ? cleanHtml(data.back || '') + '\n<br/>\n' + cleanHtml(data.note || '') : cleanHtml(
       (side ? data[side] : template) || '',
     )}
-  ${!data.js ? `<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>` : cleanCssJs(data.js, 'js')}
+  ${!data.js ? '<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>' : cleanCssJs(data.js, 'js')}
   `
 }
 

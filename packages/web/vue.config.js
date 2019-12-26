@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   devServer: {
     proxy: {
@@ -9,5 +11,8 @@ module.exports = {
         target: 'http://localhost:48000',
       },
     },
+  },
+  chainWebpack: (config) => {
+    config.resolve.symlinks(false)
   },
 }

@@ -93,7 +93,7 @@ export default class Import extends Vue {
       })
     }
 
-    xhr.open('POST', `/api/io/`)
+    xhr.open('POST', '/api/io/')
     xhr.send(formData)
   }
 

@@ -166,7 +166,7 @@ export default class EntryEditor extends Vue {
       const { data } = await api.request({
         url: '/editor/',
         method: 'POST',
-        data: { q: { 'card___id': this.entryId } },
+        data: { q: { card___id: this.entryId } },
       })
 
       Vue.set(this, 'data', fixData(data.data[0]))

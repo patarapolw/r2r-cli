@@ -24,7 +24,7 @@ export default class Settings extends Vue {
       'Please ensure you want to reset the database. The app will restart afterwards.')
 
     if (r) {
-      const rDelete = await fetch(`/api/reset`, {
+      const rDelete = await fetch('/api/reset', {
         method: 'DELETE',
       })
       if (rDelete.status === 200) {

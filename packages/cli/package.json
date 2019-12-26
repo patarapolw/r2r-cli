@@ -7,8 +7,7 @@
     "r2r": "./dist/cli.js"
   },
   "scripts": {
-    "start": "node ./dist/cli.js .",
-    "help": "ts-node ./src/cli.ts --help",
+    "start": "node ./dist/cli.js",
     "build": "tsc",
     "prepack": "tsc"
   },
